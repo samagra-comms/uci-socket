@@ -29,15 +29,17 @@ class UCI {
   }
   
 
-  sendMessage = ({ text, to, from, optional }: any) => {
+  sendMessage = ({ text, to, from, optional, conversationId, asrId, userId }: any) => {
     this.socket?.emit("botRequest", {
       content: {
         text,
         to,
         appId: optional?.appId,
         channel: optional?.channel,
+        conversationId: conversationId || null, 
+        asrId: asrId || null,
         from,
-        userId: this.session.userID,
+        userId: userId || this.session.userID,
         context: null,
         accessToken: null,
       },
